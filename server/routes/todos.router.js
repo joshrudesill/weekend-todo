@@ -5,12 +5,11 @@ const pg = require("pg"); //import pg
 
 // GET
 router.get("/", (req, res) => {
-  let getQueryText = `SELECT * FROM "todos";`;
+  let getQueryText = `SELECT * FROM "todos" ORDER BY todo ASC;`;
 
   pool
     .query(getQueryText)
     .then((result) => {
-      console.log(result.rows);
       res.send(result.rows);
     })
 
@@ -22,20 +21,14 @@ router.get("/", (req, res) => {
 
 // POST
 router.post("/", (req, res) => {
-  let newKoala = req.body;
-  console.log(`Adding new koala`, newKoala);
+  let newTodo = req.body;
+  console.log(`Adding new todo`, newTodo);
 
-  let queryText = `INSERT INTO "koalas" ("name", "favorite_color", "age", "ready_to_transfer", "notes")
-    VALUES ($1, $2, $3, $4, $5);`;
+  let queryText = `INSERT INTO "todos" ("todo", "notes")
+    VALUES ($1, $2);`;
 
   pool
-    .query(queryText, [
-      newKoala.name,
-      newKoala.favorite_color,
-      newKoala.age,
-      newKoala.ready_to_transfer,
-      newKoala.notes,
-    ])
+    .query(queryText, [newTodo.todo, newTodo.notes])
     .then((result) => {
       res.sendStatus(201);
     })
@@ -51,7 +44,7 @@ router.put("/:id", (req, res) => {
   let id = req.params.id;
 
   let putsqlText =
-    'UPDATE koalas SET "ready_to_transfer" = NOT "ready_to_transfer" WHERE id=$1;';
+    'UPDATE "todos" SET "isComplete" = NOT "isComplete" WHERE id=$1;';
   pool
     .query(putsqlText, [id])
     .then((result) => {
@@ -67,19 +60,16 @@ router.put("/:id", (req, res) => {
 // DELETE
 
 router.delete("/:id", (req, res) => {
-  console.log("rew params: ", req.params);
   let id = req.params.id;
 
-  let queryText = `DELETE FROM "koalas" WHERE "id" = $1;`;
+  let queryText = `DELETE FROM "todos" WHERE "id" = $1;`;
 
   pool
     .query(queryText, [id])
     .then((result) => {
-      console.log(`DELETE query worked, ${queryText}`, result);
-      res.send(204);
+      res.sendStatus(204);
     })
     .catch((error) => {
-      console.log(`DELETE query failed, ${queryText}`, error);
       res.sendStatus(500);
     });
 });
