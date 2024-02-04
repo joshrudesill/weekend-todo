@@ -1,17 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="style.css">
-  <script src="./scripts/axios.js"></script>
-  <script src="./scripts/client.js"></script>
-  <title>SQL TO-DO List</title>
-</head>
-<body>
-  <header>
-    <h1>SQL TO-DO List</h1>
-  </header>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="./scripts/axios.js"></script>
+    <script defer src="./scripts/client.js"></script>
+    <title>SQL TO-DO List</title>
+  </head>
+  <body class="p-5 font-sans">
+    <header class="m-3">
+      <p class="font-sans text-2xl font-thin">SQL TO-DO List</p>
+    </header>
+    <section>
+      <form onsubmit="saveKoala(event)">
+        <div
+          class="flex flex-col w-1/4 gap-2 border p-3 rounded-md bg-slate-200"
+        >
+          <input
+            type="text"
+            id="todoName"
+            value=""
+            placeholder="Todo"
+            maxlength="20"
+            class="bg-gray-50 border border-gray-400 text-gray-900 text-sm rounded-md p-2"
+            required
+          />
 
-</body>
+          <textarea
+            type="text"
+            id="notesIn"
+            value=""
+            placeholder="Notes"
+            maxlength="256"
+            class="bg-gray-50 border border-gray-400 text-gray-900 text-sm rounded-md p-2 h-48"
+          ></textarea>
+          <button
+            type="submit"
+            id="addButton"
+            class="rounded-md bg-orange-600 py-2 px-4 text-lg font-bold text-white border-b-4 border-orange-800 tracking-wider hover:bg-orange-700 active:translate-y-1 active:border-0"
+          >
+            Add Todo
+          </button>
+        </div>
+      </form>
+    </section>
+    <section>
+      <h2>Todos</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Todo</th>
+            <th>Notes</th>
+            <th>Is Complete?</th>
+          </tr>
+        </thead>
+        <tbody id="todos"></tbody>
+      </table>
+    </section>
+  </body>
 </html>
