@@ -1,9 +1,9 @@
-# Project Name
+# Weekend TODO Project
 
-[Project Instructions](./INSTRUCTIONS.md), this line may be removed once you have updated the README.md
+## Simple todo app with vanilla js frontend, an express backend, and postgres as a DB. Tailwind used for styling
 
-## Description
+A project that tracks todos entered by the user, and the todos can be marked completed and deleted.
 
-Your project description goes here. What problem did you solve? How did you solve it?
-
-Additional README details can be found [here](https://github.com/PrimeAcademy/readme-template/blob/master/README.md).
+`npm i`
+`npm start`
+### Project wont work without a postgres db running on localhost. See database.sql for setup
