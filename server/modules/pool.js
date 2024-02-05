@@ -7,12 +7,7 @@ if (process.env.NODE_ENV === "test") {
 }
 
 const pool = new pg.Pool({
-  host: "localhost",
-  port: 5432,
-  database: databaseName,
-  allowExitOnIdle: true,
-  user: "postgres",
-  password: "password",
+  connectionString: process.env.POSTGRES_URL + "?sslmode=require",
 });
 
 module.exports = pool;
