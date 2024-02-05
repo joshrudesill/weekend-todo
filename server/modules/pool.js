@@ -7,7 +7,7 @@ if (process.env.NODE_ENV === "test") {
 }
 
 const pool = new pg.Pool({
-  connectionString: process.env.POSTGRES_URL + "?sslmode=require",
+  connectionString: process.env.POSTGRES_URL_URL + "?sslmode=require",
 });
 
 module.exports = pool;
